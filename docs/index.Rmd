@@ -15,7 +15,7 @@ knitr::opts_chunk$set(message = FALSE)
 ```{r map, echo=FALSE}
 library(leaflet)
 library(dplyr)
-setwd("C:/Users/37125/Documents/R")
+
 greenLeafIcon <- makeIcon(
   iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
   iconWidth = 38, iconHeight = 95,
@@ -24,7 +24,7 @@ greenLeafIcon <- makeIcon(
   shadowWidth = 50, shadowHeight = 64,
   shadowAnchorX = 4, shadowAnchorY = 62
 )
-parks <- read.csv("baltic_national_parks.csv")
+parks <- read.csv("https://raw.githubusercontent.com/marija-grj/Interactive-Map/main/baltic_national_parks.csv")
 parks %>% 
     leaflet() %>% 
     addTiles() %>% 
