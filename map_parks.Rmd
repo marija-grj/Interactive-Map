@@ -1,0 +1,38 @@
+---
+title: "National parks of Baltics"
+author: "Marija Grjazniha"
+date: "April 6, 2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+```
+
+
+```{r map, echo=FALSE}
+library(leaflet)
+library(dplyr)
+setwd("C:/Users/37125/Documents/R")
+greenLeafIcon <- makeIcon(
+  iconUrl = "http://leafletjs.com/examples/custom-icons/leaf-green.png",
+  iconWidth = 38, iconHeight = 95,
+  iconAnchorX = 22, iconAnchorY = 94,
+  shadowUrl = "http://leafletjs.com/examples/custom-icons/leaf-shadow.png",
+  shadowWidth = 50, shadowHeight = 64,
+  shadowAnchorX = 4, shadowAnchorY = 62
+)
+parks <- read.csv("baltic_national_parks.csv")
+parks %>% 
+    leaflet() %>% 
+    addTiles() %>% 
+    addMarkers(#radius=200*sqrt(parks$area_sqkm), weight=1,
+               popup = paste("<b>", parks$name, "</b><br>",
+                           "Area:", parks$area_sqkm, "km <sup>2</sup><br>",
+                           "Established:", parks$established),
+               icon = greenLeafIcon)
+```
+
+Source: https://en.wikipedia.org/wiki/List_of_national_parks_in_the_Baltics 
